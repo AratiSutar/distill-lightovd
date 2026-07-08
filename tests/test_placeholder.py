@@ -12,3 +12,4 @@ def test_placeholder():
 def test_project_importable():
     """Sanity check that the src package is importable once installed/on path."""
     import src  # noqa: F401
+    
