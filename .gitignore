@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# PyTorch / ML artifacts
+*.pt
+*.pth
+*.onnx
+*.ckpt
+runs/
+wandb/
+mlruns/
+
+# Data (keep repo light — datasets fetched separately)
+data/raw/
+data/processed/
+data/pseudo_labels/
+*.jpg
+*.jpeg
+*.png
+!docs/**/*.png
+!docs/**/*.jpg
+
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Env / secrets
+.env
+*.env.local
+
+# Docker
+*.log

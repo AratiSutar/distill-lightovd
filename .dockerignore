@@ -1,0 +1,47 @@
+# Git
+.git/
+.github/
+.gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+notebooks/
+
+# Data & model artifacts (mounted or pulled at runtime, not baked into image)
+data/
+*.pt
+*.pth
+*.onnx
+*.ckpt
+runs/
+wandb/
+mlruns/
+
+# Docs / non-runtime
+README.md
+LICENSE
+docs/
+
+# Tests (not needed in the runtime image)
+tests/
+
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Env / secrets
+.env
+*.env.local
