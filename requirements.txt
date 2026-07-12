@@ -6,3 +6,16 @@ pillow
 pytest
 flake8
 black
+
+# Core
+numpy
+pillow
+
+# Teacher model (OWL-ViT)
+torch
+transformers
+
+# Testing & linting (used by CI)
+pytest
+flake8
+black
