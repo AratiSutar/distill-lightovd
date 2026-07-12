@@ -12,7 +12,9 @@ from transformers import OwlViTProcessor, OwlViTForObjectDetection
 class OwlViTTeacher:
     """Wraps OWL-ViT for zero-shot, text-prompted object detection."""
 
-    def __init__(self, model_id: str = "google/owlvit-base-patch32", device: str = None):
+    def __init__(
+        self, model_id: str = "google/owlvit-base-patch32", device: str = None
+    ):
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.processor = OwlViTProcessor.from_pretrained(model_id)
         self.model = OwlViTForObjectDetection.from_pretrained(model_id).to(self.device)
@@ -35,9 +37,9 @@ class OwlViTTeacher:
         Returns:
             dict with keys: boxes (list[list[float]]), scores (list[float]), labels (list[str])
         """
-        inputs = self.processor(text=text_queries, images=image, return_tensors="pt").to(
-            self.device
-        )
+        inputs = self.processor(
+            text=text_queries, images=image, return_tensors="pt"
+        ).to(self.device)
 
         with torch.no_grad():
             outputs = self.model(**inputs)
