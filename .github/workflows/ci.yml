@@ -43,3 +43,18 @@ jobs:
       - name: Run tests with pytest
         run: |
           pytest tests/ -v
+
+docker-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build -t distill-lightovd:ci .
+
+      - name: Smoke test container
+        run: |
+          docker run --rm distill-lightovd:ci
