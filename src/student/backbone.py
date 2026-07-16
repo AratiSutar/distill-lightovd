@@ -3,7 +3,6 @@ Lightweight CNN backbone for the student detector.
 Designed for fast CPU inference on edge devices.
 """
 
-
 import torch.nn as nn
 
 
