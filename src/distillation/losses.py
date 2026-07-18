@@ -12,21 +12,27 @@ from src.distillation.target_assignment import (
 )
 
 
-def compute_class_weights(class_counts, num_classes):
+def compute_class_weights(class_counts, num_classes, max_weight_ratio=5.0):
     """
-    Compute inverse-frequency class weights to counter dataset imbalance.
+    Compute inverse-frequency class weights to counter dataset imbalance,
+    clipped to avoid extreme swings that destabilize early training.
 
     Args:
         class_counts: dict mapping class_idx -> count (from your dataset)
         num_classes: total number of classes
+        max_weight_ratio: maximum allowed ratio between highest and lowest weight
 
     Returns:
-        Tensor of shape (num_classes,) with normalized weights.
+        Tensor of shape (num_classes,) with normalized, clipped weights.
     """
     counts = torch.tensor(
         [class_counts.get(i, 1) for i in range(num_classes)], dtype=torch.float32
     )
     weights = 1.0 / counts
+
+    min_weight = weights.max() / max_weight_ratio
+    weights = weights.clamp(min=min_weight)
+
     weights = weights / weights.sum() * num_classes  # normalize so weights average to 1
     return weights
 
