@@ -19,3 +19,5 @@ transformers
 pytest
 flake8
 black
+
+torchvision
