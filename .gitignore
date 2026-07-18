@@ -33,6 +33,8 @@ data/pseudo_labels/
 *.png
 !docs/**/*.png
 !docs/**/*.jpg
+!results/**/*.png
+!results/**/*.jpg
 
 # OS / Editor
 .DS_Store
