@@ -41,11 +41,13 @@ def assign_targets_single_image(centers, gt_boxes, gt_labels, num_classes):
     num_cells = centers.shape[0]
     num_boxes = gt_boxes.shape[0]
 
+    device = centers.device
+
     if num_boxes == 0:
         # no objects in this image — everything is background
-        cls_targets = torch.full((num_cells,), -1, dtype=torch.long)
-        reg_targets = torch.zeros((num_cells, 4))
-        centerness_targets = torch.zeros((num_cells,))
+        cls_targets = torch.full((num_cells,), -1, dtype=torch.long, device=device)
+        reg_targets = torch.zeros((num_cells, 4), device=device)
+        centerness_targets = torch.zeros((num_cells,), device=device)
         return cls_targets, reg_targets, centerness_targets
 
     cx = centers[:, 0].unsqueeze(1)  # (H*W, 1)
@@ -76,17 +78,17 @@ def assign_targets_single_image(centers, gt_boxes, gt_labels, num_classes):
 
     is_positive = min_areas < float("inf")  # cells that matched at least one box
 
-    cls_targets = torch.full((num_cells,), -1, dtype=torch.long)
+    cls_targets = torch.full((num_cells,), -1, dtype=torch.long, device=device)
     cls_targets[is_positive] = gt_labels[matched_box_idx[is_positive]]
 
-    reg_targets = torch.zeros((num_cells, 4))
+    reg_targets = torch.zeros((num_cells, 4), device=device)
     reg_targets[is_positive, 0] = left[is_positive, matched_box_idx[is_positive]]
     reg_targets[is_positive, 1] = top[is_positive, matched_box_idx[is_positive]]
     reg_targets[is_positive, 2] = right[is_positive, matched_box_idx[is_positive]]
     reg_targets[is_positive, 3] = bottom[is_positive, matched_box_idx[is_positive]]
 
     # centerness: sqrt( (min(l,r)/max(l,r)) * (min(t,b)/max(t,b)) )
-    centerness_targets = torch.zeros((num_cells,))
+    centerness_targets = torch.zeros((num_cells,), device=device)
     l, t, r, b = (
         reg_targets[:, 0],
         reg_targets[:, 1],
