@@ -216,6 +216,7 @@ class DistillationLoss(nn.Module):
                 gt_boxes_list[i].to(device),
                 gt_labels_list[i].to(device),
                 self.num_classes,
+                stride=self.stride,
             )
             all_cls_targets.append(cls_t)
             all_reg_targets.append(reg_t)

@@ -23,7 +23,7 @@ def generate_grid_centers(feature_h, feature_w, stride):
     return centers  # shape: (H*W, 2)
 
 
-def assign_targets_single_image(centers, gt_boxes, gt_labels, num_classes):
+def assign_targets_single_image(centers, gt_boxes, gt_labels, num_classes, stride=16):
     """
     Assign ground-truth boxes to grid cells for a single image.
 
@@ -82,10 +82,18 @@ def assign_targets_single_image(centers, gt_boxes, gt_labels, num_classes):
     cls_targets[is_positive] = gt_labels[matched_box_idx[is_positive]]
 
     reg_targets = torch.zeros((num_cells, 4), device=device)
-    reg_targets[is_positive, 0] = left[is_positive, matched_box_idx[is_positive]]
-    reg_targets[is_positive, 1] = top[is_positive, matched_box_idx[is_positive]]
-    reg_targets[is_positive, 2] = right[is_positive, matched_box_idx[is_positive]]
-    reg_targets[is_positive, 3] = bottom[is_positive, matched_box_idx[is_positive]]
+    reg_targets[is_positive, 0] = (
+        left[is_positive, matched_box_idx[is_positive]] / stride
+    )
+    reg_targets[is_positive, 1] = (
+        top[is_positive, matched_box_idx[is_positive]] / stride
+    )
+    reg_targets[is_positive, 2] = (
+        right[is_positive, matched_box_idx[is_positive]] / stride
+    )
+    reg_targets[is_positive, 3] = (
+        bottom[is_positive, matched_box_idx[is_positive]] / stride
+    )
 
     # centerness: sqrt( (min(l,r)/max(l,r)) * (min(t,b)/max(t,b)) )
     centerness_targets = torch.zeros((num_cells,), device=device)
