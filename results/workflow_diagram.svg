@@ -1,0 +1,43 @@
+<svg width="680" height="716" viewBox="0 0 680 716" xmlns="http://www.w3.org/2000/svg">
+<style>
+  .box-purple { fill: #f3e8ff; stroke: #9333ea; }
+  .box-teal { fill: #e6fffa; stroke: #0d9488; }
+  .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 18px; font-weight: 600; fill: #1a1a1a; }
+  .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; fill: #555; }
+  .arrow { stroke: #666; stroke-width: 2; }
+</style>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+
+<rect x="190" y="40" width="300" height="56" rx="8" class="box-purple" stroke-width="1.5"/>
+<text x="340" y="62" text-anchor="middle" class="title">OWL-ViT teacher</text>
+<text x="340" y="82" text-anchor="middle" class="subtitle">Zero-shot object detection</text>
+<line x1="340" y1="96" x2="340" y2="152" class="arrow" marker-end="url(#arrow)"/>
+
+<rect x="190" y="156" width="300" height="56" rx="8" class="box-purple" stroke-width="1.5"/>
+<text x="340" y="178" text-anchor="middle" class="title">Pseudo-labeling</text>
+<text x="340" y="198" text-anchor="middle" class="subtitle">COCO images auto-labeled</text>
+<line x1="340" y1="212" x2="340" y2="268" class="arrow" marker-end="url(#arrow)"/>
+
+<rect x="190" y="272" width="300" height="56" rx="8" class="box-purple" stroke-width="1.5"/>
+<text x="340" y="294" text-anchor="middle" class="title">Dataset</text>
+<text x="340" y="314" text-anchor="middle" class="subtitle">2,500 images, 12 classes</text>
+<line x1="340" y1="328" x2="340" y2="384" class="arrow" marker-end="url(#arrow)"/>
+
+<rect x="190" y="388" width="300" height="56" rx="8" class="box-teal" stroke-width="1.5"/>
+<text x="340" y="410" text-anchor="middle" class="title">Student training</text>
+<text x="340" y="430" text-anchor="middle" class="subtitle">FCOS-style distillation</text>
+<line x1="340" y1="444" x2="340" y2="500" class="arrow" marker-end="url(#arrow)"/>
+
+<rect x="190" y="504" width="300" height="56" rx="8" class="box-teal" stroke-width="1.5"/>
+<text x="340" y="526" text-anchor="middle" class="title">Evaluation</text>
+<text x="340" y="546" text-anchor="middle" class="subtitle">mAP and CPU benchmark</text>
+<line x1="340" y1="560" x2="340" y2="616" class="arrow" marker-end="url(#arrow)"/>
+
+<rect x="190" y="620" width="300" height="56" rx="8" class="box-teal" stroke-width="1.5"/>
+<text x="340" y="642" text-anchor="middle" class="title">Deployment</text>
+<text x="340" y="662" text-anchor="middle" class="subtitle">FastAPI, Docker, CI/CD</text>
+</svg>
