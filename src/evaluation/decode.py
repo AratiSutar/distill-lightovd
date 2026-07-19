@@ -64,10 +64,10 @@ def decode_predictions(
     filtered_scores = max_scores[keep_mask]
     filtered_classes = class_ids[keep_mask]
 
-    x1 = filtered_centers[:, 0] - filtered_reg[:, 0] * stride
-    y1 = filtered_centers[:, 1] - filtered_reg[:, 1] * stride
-    x2 = filtered_centers[:, 0] + filtered_reg[:, 2] * stride
-    y2 = filtered_centers[:, 1] + filtered_reg[:, 3] * stride
+    x1 = filtered_centers[:, 0] - filtered_reg[:, 0]
+    y1 = filtered_centers[:, 1] - filtered_reg[:, 1]
+    x2 = filtered_centers[:, 0] + filtered_reg[:, 2]
+    y2 = filtered_centers[:, 1] + filtered_reg[:, 3]
     boxes = torch.stack([x1, y1, x2, y2], dim=1)
 
     keep_indices = batched_nms(boxes, filtered_scores, filtered_classes, nms_threshold)
